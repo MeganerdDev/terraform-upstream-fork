@@ -1,0 +1,19 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '*/120 * * * *' # every 120 minutes
+  workflow_dispatch: # on button click
+
+jobs:
+  sync:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: meganerddev/sync-upstream-repo@v1.3.0
+        with:
+          upstream_repo: "https://github.com/gruntwork-io/terraform.git"
+          upstream_branch: master
+          downstream_branch: master
+          token: ${{ secrets.GITHUB_TOKEN }}
